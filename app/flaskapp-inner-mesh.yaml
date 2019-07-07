@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: flaskapp-vs-inner
+spec:
+  hosts:
+  - flaskapp
+  gateways:
+  - mesh
+  http:
+  - route:
+#    - destination:
+#        host: flaskapp.default.svc.cluster.local
+#        subset: v1
+#      weight: 70  
+    - destination:
+        host: flaskapp.default.svc.cluster.local
+        subset: v2
+#      weight: 30 

@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: flaskapp-vs-v1v2
+spec:
+  hosts:
+  #- flaskapp.default.svc.cluster.local
+  - "flaskapp.microservice.rocks"
+  gateways:
+  #- mesh
+  - example-gateway
+  http:
+  - match:
+  #  - uri:
+  #      prefix: /env
+    - gateways:
+      - example-gateway
+    route:
+    - destination:
+        host: flaskapp.default.svc.cluster.local
+        subset: v1
+ # - route:
+ #   - destination:
+ #       host: flaskapp.default.svc.cluster.local
+ #       subset: v1
+ #     weight: 70  
+ #   - destination:
+ #       host: flaskapp.default.svc.cluster.local
+ #       subset: v2
+ #     weight: 30 

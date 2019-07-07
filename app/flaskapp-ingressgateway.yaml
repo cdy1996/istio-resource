@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: example-gateway
+spec:
+  selector:
+  # 指定哪些gateway pod 负责这个gateway对象的执行
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    # 通配符域名来指明这个gateway可能负责主机名
+    - "flaskapp.microservice.rocks"
+    - "*.microservice.xyz"
