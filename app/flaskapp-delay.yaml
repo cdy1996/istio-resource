@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: flask-vs-delay
+spec:
+  hosts:
+  - "flaskapp"
+  http:
+  - route:
+    - destination:
+        host: flaskapp
+    fault:
+      delay:
+        # 延迟的时间长度,必须大于1毫秒
+        fixedDelay: 3s
+        # 植入延迟的比率,默认值100%
+        percent: 100

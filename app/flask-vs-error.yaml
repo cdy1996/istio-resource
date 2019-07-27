@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata :
+  name: flaskapp-error
+spec:
+  hosts:
+  - flaskapp
+  http:
+  - match:
+    - sourceLabels:
+        version: v1
+    route:
+    - destination:
+        host: flaskapp
+    fault:
+      abort:
+         httpStatus: 500
+         percent: 100  
+ 

@@ -1,0 +1,11 @@
+apiVersion: config.istio.io/v1alpha2
+kind : rule
+metadata:
+  name: stdio
+ # namespace: istio-system
+
+spec:
+  actions:
+  - handler: handler.stdio
+    instances: [sleep-log.logentry]
+  match: context.protocol == "http" && source.labels["app"] == "sleep"
